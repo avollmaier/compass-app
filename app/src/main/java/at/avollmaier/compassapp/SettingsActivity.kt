@@ -5,18 +5,17 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
-
-class MainActivity : AppCompatActivity() {
+class SettingsActivity : AppCompatActivity() {
 
 
     private lateinit var bottomNavigationView: BottomNavigationView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_settings)
 
         bottomNavigationView = findViewById(R.id.bottom_nav_view)
-        bottomNavigationView.selectedItemId = R.id.navigation_home
+        bottomNavigationView.selectedItemId = R.id.navigation_settings
         bottomNavigationView.setOnItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.navigation_home -> {
