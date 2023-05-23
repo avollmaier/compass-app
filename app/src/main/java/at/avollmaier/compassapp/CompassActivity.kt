@@ -5,18 +5,16 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
-
-class MainActivity : AppCompatActivity() {
-
-
+class CompassActivity : AppCompatActivity() {
     private lateinit var bottomNavigationView: BottomNavigationView
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_compass)
 
         bottomNavigationView = findViewById(R.id.bottom_nav_view)
-        bottomNavigationView.selectedItemId = R.id.navigation_home
+        bottomNavigationView.selectedItemId = R.id.navigation_compass
         bottomNavigationView.setOnItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.navigation_home -> {

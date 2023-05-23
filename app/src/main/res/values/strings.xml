@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">Compass App</string>
+    <string name="title_activity_maps">MapsActivity</string>
+    <string name="title_compass">Compass</string>
+    <string name="title_home">Home</string>
+    <string name="title_map">Map</string>
+    <string name="title_settings">Settings</string>
+    <string name="title_waypoints">Waypoints</string>
+    <string name="home_activity">Home Activity</string>
+    <string name="compass_activity">Compass Activity</string>
+    <string name="waypoints_activity">Waypoints Activity</string>
+    <string name="settings_activity">Settings Activity</string>
 </resources>
