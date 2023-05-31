@@ -1,55 +1,79 @@
 package at.avollmaier.compassapp
 
-import android.content.Intent
 import android.os.Bundle
+import android.util.Log
+import android.view.animation.Animation
+import android.view.animation.RotateAnimation
+import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
-import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class CompassActivity : AppCompatActivity() {
-    private lateinit var bottomNavigationView: BottomNavigationView
-
-
+    private var compass: Compass? = null
+    private var arrowView: ImageView? = null
+    private var currentAzimuth = 0f
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_compass)
+        arrowView = findViewById<ImageView>(R.id.iv_compass)
+        setupCompass()
+    }
 
-        bottomNavigationView = findViewById(R.id.bottom_nav_view)
-        bottomNavigationView.selectedItemId = R.id.navigation_compass
-        bottomNavigationView.setOnItemSelectedListener { menuItem ->
-            when (menuItem.itemId) {
-                R.id.navigation_home -> {
-                    startActivity(MainActivity::class.java)
-                    true
+    override fun onStart() {
+        super.onStart()
+        Log.d(TAG, "start compass")
+        compass?.start()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        compass?.stop()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        compass?.start()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Log.d(TAG, "stop compass")
+        compass?.stop()
+    }
+
+    private fun setupCompass() {
+        compass = Compass(this)
+        val cl: Compass.CompassListener = compassListener
+
+        compass?.setListener(cl)
+    }
+
+    private fun adjustArrow(azimuth: Float) {
+        Log.d(
+            TAG, "will set rotation from " + currentAzimuth + " to "
+                    + azimuth
+        )
+        val an: Animation = RotateAnimation(
+            -currentAzimuth, -azimuth,
+            Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF,
+            0.5f
+        )
+        currentAzimuth = azimuth
+        an.duration = 500
+        an.repeatCount = 0
+        an.fillAfter = true
+        arrowView!!.startAnimation(an)
+    }
+
+    private val compassListener: Compass.CompassListener
+        get() = object : Compass.CompassListener {
+            override fun onNewAzimuth(azimuth: Float) {
+                runOnUiThread {
+                    adjustArrow(azimuth)
                 }
-
-                R.id.navigation_compass -> {
-                    startActivity(CompassActivity::class.java)
-                    true
-                }
-
-                R.id.navigation_map -> {
-                    startActivity(MapsActivity::class.java)
-                    true
-                }
-
-                R.id.navigation_settings -> {
-                    startActivity(SettingsActivity::class.java)
-                    true
-                }
-
-                R.id.navigation_waypoints -> {
-                    startActivity(WaypointsActivity::class.java)
-                    true
-                }
-
-                else -> false
             }
         }
 
-    }
-
-    private fun startActivity(cls: Class<*>) {
-        val intent = Intent(this, cls)
-        startActivity(intent)
+    companion object {
+        private const val TAG = "CompassActivity"
     }
 }
