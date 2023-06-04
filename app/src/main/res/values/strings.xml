@@ -8,6 +8,13 @@
     <string name="title_waypoints">Waypoints</string>
     <string name="home_activity">Home Activity</string>
     <string name="compass_activity">Compass Activity</string>
-    <string name="waypoints_activity">Waypoints Activity</string>
-    <string name="settings_activity">Settings Activity</string>
+    <string name="waypoints_activity">Waypoints</string>
+    <string name="clear_database">Clear Database</string>
+    <string name="longitude">Longitude</string>
+    <string name="latitude">Latitude</string>
+    <string name="add">Add</string>
+    <string name="label">Label</string>
+    <string name="DB_Cleared">Database has been cleared</string>
+    <string name="DB_Upgraded">Database is upgraded</string>
+    <string name="DB_Created">Database is created</string>
 </resources>
