@@ -5,14 +5,64 @@
     android:orientation="vertical">
 
     <!-- Replace with your home activity layout content -->
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:text="@string/waypoints_activity"
-        android:textSize="24sp" />
 
     <!-- Bottom navigation bar -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="10"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/l_wp_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/waypoints_activity"
+            android:textAlignment="center"
+            android:textSize="24sp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_waypoints"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <EditText
+            android:id="@+id/txt_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/label"
+            android:inputType="text" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/txt_latitude"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="@string/latitude"
+                android:inputType="numberDecimal" />
+
+            <EditText
+                android:id="@+id/txt_longitude"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="@string/longitude"
+                android:inputType="numberDecimal" />
+
+            <Button
+                android:id="@+id/btnAddWaypoint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/add" />
+        </LinearLayout>
+    </LinearLayout>
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_nav_view"
         android:layout_width="match_parent"
