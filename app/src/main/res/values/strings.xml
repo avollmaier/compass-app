@@ -17,4 +17,16 @@
     <string name="DB_Cleared">Database has been cleared</string>
     <string name="DB_Upgraded">Database is upgraded</string>
     <string name="DB_Created">Database is created</string>
+
+    <string name="cardinal_direction_north">North</string>
+    <string name="cardinal_direction_northeast">Northeast</string>
+    <string name="cardinal_direction_east">East</string>
+    <string name="cardinal_direction_southeast">Southeast</string>
+    <string name="cardinal_direction_south">South</string>
+    <string name="cardinal_direction_southwest">Southwest</string>
+    <string name="cardinal_direction_west">West</string>
+    <string name="cardinal_direction_northwest">Northwest</string>
+    <string name="cardinal_direction_west_abbreviation">W</string>
+    <string name="zero_degrees" translatable="false">0°</string>
+    <string name="degree">%.0f°</string>
 </resources>

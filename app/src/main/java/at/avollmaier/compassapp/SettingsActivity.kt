@@ -27,11 +27,6 @@ class SettingsActivity : AppCompatActivity() {
         bottomNavigationView.selectedItemId = R.id.navigation_settings
         bottomNavigationView.setOnItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
-                R.id.navigation_home -> {
-                    startActivity(MainActivity::class.java)
-                    true
-                }
-
                 R.id.navigation_compass -> {
                     startActivity(CompassActivity::class.java)
                     true

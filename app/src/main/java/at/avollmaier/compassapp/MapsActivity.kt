@@ -57,11 +57,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         bottomNavigationView.selectedItemId = R.id.navigation_map
         bottomNavigationView.setOnItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
-                R.id.navigation_home -> {
-                    startActivity(MainActivity::class.java)
-                    true
-                }
-
                 R.id.navigation_compass -> {
                     startActivity(CompassActivity::class.java)
                     true
