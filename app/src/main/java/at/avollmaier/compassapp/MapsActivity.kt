@@ -8,16 +8,17 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.UiSettings
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
-class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
+class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMapClickListener {
 
     private lateinit var mMap: GoogleMap
     private lateinit var binding: ActivityMapsBinding
     private lateinit var bottomNavigationView: BottomNavigationView
-
+    lateinit var uiSettings: UiSettings
 
     /**
      * Manipulates the map once available.
@@ -35,8 +36,10 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         mMap.addMarker(MarkerOptions().position(fhMarker).title("FH Joanneum Kapfenberg"))
         mMap.moveCamera(CameraUpdateFactory.newLatLng(fhMarker))
         mMap.animateCamera(CameraUpdateFactory.zoomTo(15.0f))
-
-
+        uiSettings = mMap.uiSettings
+//        uiSettings.isScrollGesturesEnabled = true
+        uiSettings.isZoomControlsEnabled = true
+        uiSettings.setAllGesturesEnabled(true)
     }
 
 
@@ -85,5 +88,12 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     private fun startActivity(cls: Class<*>) {
         val intent = Intent(this, cls)
         startActivity(intent)
+    }
+
+    override fun onMapClick(latLng: LatLng) {
+        val markerOptions = MarkerOptions()
+            .position(latLng)
+            .title("Marker")
+        mMap.addMarker(markerOptions)
     }
 }
