@@ -360,10 +360,10 @@
             android:strokeWidth="1"
             android:strokeColor="#000000" />
         <path
-            android:fillColor="?attr/colorPrimary"
+            android:fillColor="#000000"
             android:pathData="M482.7161 407.6603A81.17882 79.5864 0 0 1 320.3585 407.6603A81.17882 79.5864 0 0 1 482.7161 407.6603Z" />
         <path
-            android:fillColor="?attr/colorPrimary"
+            android:fillColor="#000000"
             android:pathData="M461.5124 405.0006A21.99001 13.17357 0 0 1 417.5324 405.0006A21.99001 13.17357 0 0 1 461.5124 405.0006Z" />
     </group>
     <group android:rotation="46.65944">
