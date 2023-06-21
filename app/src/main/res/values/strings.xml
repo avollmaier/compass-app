@@ -28,5 +28,9 @@
     <string name="cardinal_direction_northwest">Northwest</string>
     <string name="cardinal_direction_west_abbreviation">W</string>
     <string name="zero_degrees" translatable="false">0°</string>
-    <string name="degree">%.0f°</string>
+    <string name="degree_value" translatable="false">%.0f°</string>
+    <string name="degree_celsius_value">%.0f° Celsius</string>
+    <string name="humidity_value">%d Percent</string>
+    <string name="temperature">Temperature:</string>
+    <string name="humidity">Humidity:</string>
 </resources>

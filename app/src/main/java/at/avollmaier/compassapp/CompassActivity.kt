@@ -2,6 +2,7 @@ package at.avollmaier.compassapp
 
 import android.content.Intent
 import android.hardware.SensorManager
+import android.location.LocationManager
 import android.os.Bundle
 import android.view.HapticFeedbackConstants
 import android.view.animation.Animation
@@ -12,8 +13,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import at.avollmaier.compassapp.listeners.Compass
 import at.avollmaier.compassapp.listeners.Compass.CompassListener
+import at.avollmaier.compassapp.service.WeatherApiService
 import at.avollmaier.compassapp.utils.CardinalDirectionEvaluator
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import kotlin.math.abs
 
 
@@ -30,6 +35,8 @@ class CompassActivity : AppCompatActivity() {
     private var currentAzimuth = 0f
     private var lastHapticAzimuth = 0
 
+    private lateinit var tvTemperature: TextView
+    private lateinit var tvHumidity: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,9 +47,24 @@ class CompassActivity : AppCompatActivity() {
         cardinalDirectionEvaluator = CardinalDirectionEvaluator()
         registerSensorListener()
 
-        compassRoseImageView = findViewById(R.id.compass_rose_image)
-        statusDegreesText = findViewById(R.id.status_degrees_text)
-        statusCardinalDirectionText = findViewById(R.id.status_cardinal_direction_text)
+        compassRoseImageView = findViewById(R.id.iv_roseImage)
+        statusDegreesText = findViewById(R.id.tv_statusDegreeText)
+        statusCardinalDirectionText = findViewById(R.id.tv_cardinalDirection)
+        tvTemperature = findViewById(R.id.tv_temperature)
+        tvHumidity = findViewById(R.id.tv_humidity)
+
+        CoroutineScope(Dispatchers.Main).launch {
+            tvTemperature.text = getString(R.string.degree_celsius_value, 0F)
+            val weatherData = WeatherApiService().getWeatherData(47.0707, 15.4395) // Graz as default
+            tvTemperature.text = getString(
+                R.string.degree_celsius_value, kelvinToCelcius(weatherData.main.getTemp())
+            )
+            tvHumidity.text = getString(R.string.humidity_value, weatherData.main.getHumidity())
+        }
+    }
+
+    private fun kelvinToCelcius(kelvin: Double): Double {
+        return kelvin - 273.15
     }
 
     override fun onStart() {
@@ -92,7 +114,7 @@ class CompassActivity : AppCompatActivity() {
 
     private fun adjustCardinalDirection(azimuth: Float) {
         statusCardinalDirectionText.text = cardinalDirectionEvaluator?.format(azimuth).toString()
-        statusDegreesText.text = String.format(getString(R.string.degree), azimuth)
+        statusDegreesText.text = String.format(getString(R.string.degree_value), azimuth)
     }
 
     private fun adjustCompassRose(azimuth: Float) {
