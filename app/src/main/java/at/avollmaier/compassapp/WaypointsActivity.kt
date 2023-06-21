@@ -40,6 +40,18 @@ class WaypointsActivity : AppCompatActivity() {
         txtLatitude = findViewById(R.id.txt_latitude)
         txtLongitude = findViewById(R.id.txt_longitude)
 
+        //Waypoint coming from map
+        val waypointParamString = intent.getStringExtra("waypoint")
+
+        if (waypointParamString != null) {
+            val waypoint = Waypoint.deserialize(waypointParamString)
+            txtLabel.text = waypoint.label
+            txtLatitude.text = waypoint.latitude.toString()
+            txtLongitude.text = waypoint.longitude.toString()
+        }
+
+
+
         bottomNavigationView = findViewById(R.id.bottom_nav_view)
         bottomNavigationView.selectedItemId = R.id.navigation_waypoints
         bottomNavigationView.setOnItemSelectedListener { menuItem ->
